@@ -41,5 +41,5 @@ export default ({ pathname }) => {
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:site" content={twitter} />
     </Helmet>
-  );
+  )
 }
