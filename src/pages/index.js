@@ -40,6 +40,7 @@ export default () => {
   }
   return (
     <Map
+      debounceMoveend={true}
       onMoveend={handleOnMoveend}
       onzoomend={handleOnZoomed}
       center={position}
