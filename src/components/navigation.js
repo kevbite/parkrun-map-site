@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { withStyles } from "@material-ui/core/styles"
 import { navigate } from "gatsby"
 import { useParkruns } from "../parkruns/parkruns-context"
@@ -18,16 +18,21 @@ const styles = {
     zIndex: 999
   }
 }
-const navigationChanged = value => {
-  const routeList = ["/", "/filters", "/about"];
-
-  const route = routeList.find(x => x === value);
-  if (route) {
-    navigate(route)
-  }
-};
 
 export default withStyles(styles)(({ classes }) => {
+  const [route, setRoute] = useState('/');
+
+
+  const navigationChanged = value => {
+    const routeList = ["/", "/filters", "/about"];
+
+    const route = routeList.find(x => x === value);
+    if (route) {
+      navigate(route);
+      setRoute(route);
+    }
+  };
+
 
   const { state: { isLoading } } = useParkruns();
 
@@ -35,7 +40,7 @@ export default withStyles(styles)(({ classes }) => {
     {isLoading && <LinearProgress />}
     <BottomNavigation
       onChange={(_, value) => navigationChanged(value)}
-
+      value={route}
     >
       <BottomNavigationAction
         label="parkruns"
