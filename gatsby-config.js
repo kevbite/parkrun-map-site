@@ -6,12 +6,13 @@ module.exports = {
     twitter: `@ParkrunMap`,
   },
   plugins: [
-  `gatsby-plugin-material-ui`,
-  `gatsby-plugin-layout`,
-  `gatsby-plugin-react-leaflet`,
-  `gatsby-plugin-react-helmet`,
-  {
-      resolve:`gatsby-plugin-manifest`,
+    `gatsby-plugin-sitemap`,
+    `gatsby-plugin-material-ui`,
+    `gatsby-plugin-layout`,
+    `gatsby-plugin-react-leaflet`,
+    `gatsby-plugin-react-helmet`,
+    {
+      resolve: `gatsby-plugin-manifest`,
       options: {
         name: `Unofficial Parkrun Event Map`,
         short_name: `Parkrun Map`,
@@ -21,7 +22,7 @@ module.exports = {
         display: `standalone`,
         icon: `src/images/icon.png`
 
-    },
-  }
-],
+      },
+    }
+  ],
 }
