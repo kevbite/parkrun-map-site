@@ -35,7 +35,9 @@ export default () => {
     setZoom({ zoom: e.target.getZoom() });
 
   };
-
+  if (typeof window === 'undefined') {
+    return null;
+  }
   return (
     <Map
       onMoveend={handleOnMoveend}
