@@ -45,7 +45,7 @@ export default withStyles(styles)(({ classes }) => {
   return (
     <div className={classes.container}>
       <List subheader={<h1>Filters</h1>} className={classes.root}>
-        {availableFilters.map(x => <ListItem onClick={onFilterChanged(x.propName)}>
+        {availableFilters.map(x => <ListItem key={x.propName} onClick={onFilterChanged(x.propName)}>
           <ListItemIcon>
             {x.icon}
           </ListItemIcon>
