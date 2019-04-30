@@ -12,7 +12,7 @@ export default (({ children, location }) => {
       <ParkrunsProvider>
         <FiltersProvider>
           <div>{children}</div>
-          <Navigation />
+          <Navigation pathname={location.pathname} />
         </FiltersProvider>
       </ParkrunsProvider>
     </LocationProvider>);

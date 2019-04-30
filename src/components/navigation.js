@@ -19,12 +19,13 @@ const styles = {
   }
 }
 
-export default withStyles(styles)(({ classes }) => {
-  const [route, setRoute] = useState('/');
+export default withStyles(styles)(({ classes, pathname }) => {
+
+  const [route, setRoute] = useState(pathname);
 
 
   const navigationChanged = value => {
-    const routeList = ["/", "/filters", "/about"];
+    const routeList = ["/", "/filters/", "/about/"];
 
     const route = routeList.find(x => x === value);
     if (route) {
@@ -49,12 +50,12 @@ export default withStyles(styles)(({ classes }) => {
       />
       <BottomNavigationAction
         label="Filters"
-        value="/filters"
+        value="/filters/"
         icon={<FilterListIcon />}
       />
       <BottomNavigationAction
         label="Information"
-        value="/about"
+        value="/about/"
         icon={<InfoIcon />}
       />
     </BottomNavigation>
