@@ -11,6 +11,16 @@ steps:
   inputs:
     command: 'install'
 
+- script: npm test
+  displayName: 'Run Tests'
+
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+    testRunner: VSTest
+    testResultsFiles: '**/*.trx'
+    failTaskOnFailedTests: true
+
 - script: npx gatsby build
   displayName: 'Run Gatsby build'
 

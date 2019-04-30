@@ -10,7 +10,7 @@
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+    "test": "jest"
   },
   "dependencies": {
     "@material-ui/core": "^3.9.3",
@@ -30,10 +30,16 @@
     "react-leaflet": "^2.2.1"
   },
   "devDependencies": {
+    "babel-jest": "^24.7.1",
+    "babel-preset-gatsby": "^0.1.11",
     "eslint": "^5.16.0",
     "eslint-config-react-app": "^4.0.0",
     "eslint-plugin-react-hooks": "^1.6.0",
-    "prettier": "^1.17.0"
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.7.1",
+    "jest-trx-results-processor": "0.0.7",
+    "prettier": "^1.17.0",
+    "react-test-renderer": "^16.8.6"
   },
   "repository": {
     "type": "git",
