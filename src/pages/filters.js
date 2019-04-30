@@ -5,14 +5,15 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import Switch from '@material-ui/core/Switch';
 import ChildFriendlyIcon from '@material-ui/icons/ChildFriendly';
 import AccessibleForwardIcon from '@material-ui/icons/AccessibleForward';
-import BluetoothIcon from '@material-ui/icons/Bluetooth';
 import { useFilters } from '../filters/filters-context';
 
 const styles = theme => ({
+  header: {
+    paddingLeft: 16
+  },
   container: {
     display: 'flex',
     padding: 24,
@@ -44,7 +45,7 @@ export default withStyles(styles)(({ classes }) => {
 
   return (
     <div className={classes.container}>
-      <List subheader={<h1>Filters</h1>} className={classes.root}>
+      <List subheader={<h1 className={classes.header}>Filters</h1>} className={classes.root}>
         {availableFilters.map(x => <ListItem key={x.propName} onClick={onFilterChanged(x.propName)}>
           <ListItemIcon>
             {x.icon}
