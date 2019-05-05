@@ -2,10 +2,10 @@ import React from "react";
 import { Map, TileLayer, Marker, Popup } from "react-leaflet"
 import { useParkruns } from "../parkruns/parkruns-context"
 import { useLocation } from '../location/location-context';
+import { useFilteredParkruns } from '../hooks/filtered-parkruns';
 
 export default () => {
   const {
-    state: { parkruns },
     requestParkruns
   } = useParkruns();
 
@@ -14,6 +14,10 @@ export default () => {
     setLocation,
     setZoom
   } = useLocation();
+
+  const {
+    parkruns
+  } = useFilteredParkruns();
 
   const position = [latitude, longitude]
 
