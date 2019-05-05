@@ -1,8 +1,9 @@
 import React from "react";
-import { Map, TileLayer, Marker, Popup } from "react-leaflet"
+import { Map, TileLayer } from "react-leaflet"
 import { useParkruns } from "../parkruns/parkruns-context"
 import { useLocation } from '../location/location-context';
 import { useFilteredParkruns } from '../hooks/filtered-parkruns';
+import ParkrunMarker from '../components/parkrun-marker';
 
 export default () => {
   const {
@@ -62,9 +63,7 @@ export default () => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {parkruns.map(parkrun => (
-        <Marker key={parkrun.id} position={[parkrun.lat, parkrun.lon]}>
-          <Popup>{parkrun.name}</Popup>
-        </Marker>
+        <ParkrunMarker parkrun={parkrun} />
       ))}
     </Map>
   )
