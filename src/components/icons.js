@@ -8,17 +8,17 @@ const defaultOptions = {
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png'
 };
 
-export const greenIcon = new L.Icon({
+export const greenIcon = new L.icon({
   ...defaultOptions,
   iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png'
 });
 
-export const orangeIcon = new L.Icon({
+export const orangeIcon = new L.icon({
   ...defaultOptions,
   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png'
 });
 
-export const redIcon = new L.Icon({
+export const redIcon = new L.icon({
   ...defaultOptions,
   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png'
 });
