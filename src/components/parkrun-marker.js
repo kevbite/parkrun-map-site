@@ -1,6 +1,7 @@
 import React from 'react';
-import { Marker, Popup } from "react-leaflet"
+import { Marker } from "react-leaflet"
 import { greenIcon, orangeIcon, redIcon } from './icons';
+import ParkrunPopup from './parkrun-popup';
 
 const getPinIcon = (parkrun) => {
 
@@ -32,6 +33,6 @@ const getPinIcon = (parkrun) => {
 export default ({ parkrun }) => {
 
   return (<Marker key={parkrun.id} position={[parkrun.lat, parkrun.lon]} icon={getPinIcon(parkrun)}>
-    <Popup>{parkrun.name}</Popup>
+    <ParkrunPopup parkrun={parkrun} />
   </Marker>);
 };
