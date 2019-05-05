@@ -14,8 +14,9 @@ const styles = theme => ({
   section2: {
     margin: theme.spacing.unit * 2,
   },
-  section3: {
-    margin: `${theme.spacing.unit * 6}px ${theme.spacing.unit * 2}px ${theme.spacing.unit * 2}px`,
+  courseDescription: {
+    maxHeight: 200,
+    overflowY: 'scroll'
   },
   viewButton: {
     color: '#fff !important'
@@ -30,7 +31,7 @@ export default withStyles(styles)(({ parkrun, classes }) => {
       <Typography gutterBottom variant="h4">
         {parkrun.name}
       </Typography>
-      <Typography color="textSecondary">
+      <Typography className={classes.courseDescription} color="textSecondary">
         {parkrun.course.description}
       </Typography>
     </div>
