@@ -53,17 +53,22 @@ export function useParkruns() {
 
   const [state, dispatch] = context;
 
-  const requestParkruns = async ({ south, east, north, west }) => {
+  const requestParkruns = async ({ south, west, north, east }) => {
 
-    if (requests.some(x => x.south === south && x.east === east && x.north === north && x.west === west)) {
+    if (requests.some(x => south >= x.south && west >= x.west && north <= x.north && east <= x.east)) {
       return;
     }
 
-    requests.push({ south, east, north, west });
+    south = Math.floor(south * 10) / 10;
+    west = Math.floor(west * 10) / 10;
+    north = Math.ceil(north * 10) / 10;
+    east = Math.ceil(east * 10) / 10;
+
+    requests.push({ south, west, north, east });
 
     dispatch({ type: requestParkrunsType });
 
-    const url = `https://parkrun-map.azurewebsites.net/api/parkruns/geobox?lat=${south}&lon=${east}&lat=${north}&lon=${west}`;
+    const url = `https://parkrun-map.azurewebsites.net/api/parkruns/geobox?lat=${south}&lon=${west}&lat=${north}&lon=${east}`;
     const response = await fetch(url);
     const parkruns = await response.json();
 
