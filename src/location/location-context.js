@@ -25,14 +25,14 @@ const reducer = (state, action) => {
     };
   }
 
-  if(action.type === setLocationType){
+  if (action.type === setLocationType) {
     return {
       ...state,
       location: action.location
     }
   }
 
-  if(action.type === setZoomType){
+  if (action.type === setZoomType) {
     return {
       ...state,
       zoom: action.zoom
@@ -80,10 +80,25 @@ export function useLocation() {
 
   const [state, dispatch] = context;
 
+  const setLocation = ({ latitude, longitude }) => {
+    if (state.location.latitude === latitude && state.location.longitude === longitude) {
+      return;
+    }
+
+    dispatch({ type: 'SET_LOCATION', location: { latitude, longitude } })
+  };
+
+  const setZoom = ({ zoom }) => {
+    if (state.zoom === zoom) {
+      return;
+    }
+    dispatch({ type: 'SET_ZOOM', zoom })
+  };
+
   return {
     state,
     dispatch,
-    setLocation: ({latitude, longitude}) => dispatch({type: 'SET_LOCATION', location: {latitude, longitude}}),
-    setZoom: ({zoom}) => dispatch({type: 'SET_ZOOM', zoom})
+    setLocation,
+    setZoom
   };
 }

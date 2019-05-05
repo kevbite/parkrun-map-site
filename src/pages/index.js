@@ -28,12 +28,12 @@ export default () => {
 
     setLocation({ latitude: center.lat, longitude: center.lng });
 
-    await requestParkruns(
-      bounds.getSouth(),
-      bounds.getEast(),
-      bounds.getNorth(),
-      bounds.getWest()
-    );
+    await requestParkruns({
+      south: bounds.getSouth(),
+      east: bounds.getEast(),
+      north: bounds.getNorth(),
+      west: bounds.getWest()
+    });
   };
 
   const handleOnZoomed = (e) => {
