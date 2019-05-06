@@ -16,7 +16,8 @@ const styles = theme => ({
   container: {
     display: 'flex',
     padding: 24,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginBottom: 56
   },
   root: {
     width: '100%',
