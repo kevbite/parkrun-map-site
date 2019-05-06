@@ -15,6 +15,8 @@
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
+    "@mdi/js": "^3.6.95",
+    "@mdi/react": "^1.1.0",
     "gatsby": "^2.3.27",
     "gatsby-plugin-google-analytics": "^2.0.19",
     "gatsby-plugin-layout": "^1.0.15",
