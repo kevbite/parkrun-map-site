@@ -4,6 +4,7 @@ module.exports = {
     siteUrl: `https://parkrun-map.com`,
     description: `The Unofficial Parkrun Event Map that helps you find parkruns.`,
     twitter: `@ParkrunMap`,
+    keywords: `Parkrun,Running,Events,Map,Cancelled`
   },
   plugins: [
     `gatsby-plugin-sitemap`,

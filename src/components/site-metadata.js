@@ -6,7 +6,7 @@ import icon from "../images/icon.png"
 export default ({ pathname }) => {
   const {
     site: {
-      siteMetadata: { siteUrl, title, twitter },
+      siteMetadata: { siteUrl, title, description, twitter, keywords },
     },
   } = useStaticQuery(graphql`
     query SiteMetadata {
@@ -14,7 +14,9 @@ export default ({ pathname }) => {
         siteMetadata {
           siteUrl
           title
+          description
           twitter
+          keywords
         }
       }
     }
@@ -29,17 +31,22 @@ export default ({ pathname }) => {
         name="viewport"
         content="width=device-width,initial-scale=1,shrink-to-fit=no,viewport-fit=cover"
       />
+      <meta name="description" content={description} />
+      <meta name="keywords" content={keywords} />
 
       <meta property="og:url" content={siteUrl} />
       <meta property="og:type" content="website" />
       <meta property="og:locale" content="en" />
       <meta property="og:site_name" content={title} />
-      <meta property="og:image" content={`${siteUrl}${icon}`} />
+      <meta property="og:image" content={`${siteUrl}/images/og-image.png`} />
       <meta property="og:image:width" content="512" />
       <meta property="og:image:height" content="512" />
 
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:site" content={twitter} />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={`${siteUrl}/images/twitter-card-image.png`} />
     </Helmet>
   )
 }

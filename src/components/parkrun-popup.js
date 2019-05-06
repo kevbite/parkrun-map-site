@@ -42,6 +42,7 @@ export default withStyles(styles)(({ parkrun, classes }) => {
     </div>
     <Divider variant="middle" />
 
+
     <div className={classes.section3}>
       <Button className={classes.viewButton} target="_blank" href={parkrun.uri} variant="contained" color="primary" fullWidth>
         View on parkrun
