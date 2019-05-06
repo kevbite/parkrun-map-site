@@ -21,7 +21,14 @@ const styles = {
 
 export default withStyles(styles)(({ classes, pathname }) => {
 
-  const [route, setRoute] = useState(pathname);
+  const [route, setRoute] = useState(() => {
+
+    if (['/buggy-friendly/', '/wheelchair-friendly/'].some(x => x === pathname)) {
+      return '/';
+    }
+
+    return pathname;
+  });
 
 
   const navigationChanged = value => {
