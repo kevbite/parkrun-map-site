@@ -4,7 +4,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Grid from '@material-ui/core/Grid';
 import WarningIcon from '@material-ui/icons/Warning';
 
 function generate(element) {
@@ -30,7 +29,7 @@ const styles = theme => ({
 
 export default withStyles(styles)(({ classes, cancellations }) => {
 
-  return (<Grid item xs={12} md={6}>
+  return (
     <div className={classes.demo}>
       <List>
         {cancellations.map(x =>
@@ -44,6 +43,5 @@ export default withStyles(styles)(({ classes, cancellations }) => {
           </ListItem>)
         }
       </List>
-    </div>
-  </Grid>)
+    </div>)
 });
