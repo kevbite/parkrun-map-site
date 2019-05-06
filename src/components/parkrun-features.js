@@ -12,7 +12,7 @@ export default withStyles(styles)(({ features, classes }) => {
   return (<div>
     {availableFilters.filter(x =>
       features[x.propName]
-    ).map(x => x.icon)}
+    ).map(x => <x.icon className={classes.icon} />)}
   </div>);
 });
 

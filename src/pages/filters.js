@@ -40,15 +40,15 @@ export default withStyles(styles)(({ classes }) => {
   return (
     <div className={classes.container}>
       <List subheader={<h1 className={classes.header}>Filters</h1>} className={classes.root}>
-        {availableFilters.map(x => <ListItem key={x.propName} onClick={onFilterChanged(x.propName)}>
+        {availableFilters.map(filter => <ListItem key={filter.propName} onClick={onFilterChanged(filter.propName)}>
           <ListItemIcon>
-            {x.icon}
+            <filter.icon />
           </ListItemIcon>
-          <ListItemText primary={x.name} />
+          <ListItemText primary={filter.name} />
           <ListItemSecondaryAction>
             <Switch
-              onChange={onFilterChanged(x.propName)}
-              checked={filters[x.propName]}
+              onChange={onFilterChanged(filter.propName)}
+              checked={filters[filter.propName]}
             />
           </ListItemSecondaryAction>
         </ListItem>)}
