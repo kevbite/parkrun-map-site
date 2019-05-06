@@ -3,7 +3,7 @@ import React from 'react';
 import ChildFriendlyIcon from '@material-ui/icons/ChildFriendly';
 import AccessibleForwardIcon from '@material-ui/icons/AccessibleForward';
 import EyeIcon from 'mdi-react/EyeIcon';
-import WCIcon from '@material-ui/icons/WC';
+import WcIcon from '@material-ui/icons/Wc';
 import PetsIcon from '@material-ui/icons/Pets';
 import LocalCafeIcon from '@material-ui/icons/LocalCafe';
 import GroupIcon from '@material-ui/icons/Group';
@@ -20,7 +20,7 @@ export const availableFilters = [
   { name: 'Wheelchair Friendly', propName: 'wheelchairFriendly', icon: <AccessibleForwardIcon /> },
   { name: 'Buggy Friendly', propName: 'buggyFriendly', icon: <ChildFriendlyIcon /> },
   { name: 'Visually Impaired Friendly', propName: 'visuallyImpairedFriendly', icon: <EyeIcon /> },
-  { name: 'Toilets', propName: 'toilets', icon: <WCIcon /> },
+  { name: 'Toilets', propName: 'toilets', icon: <WcIcon /> },
   { name: 'Dogs Allowed', propName: 'dogsAllowed', icon: <PetsIcon /> },
   { name: 'Cafe', propName: 'cafe', icon: <LocalCafeIcon /> },
   { name: 'Post Run Coffee', propName: 'postRunCoffee', icon: <GroupIcon /> },
