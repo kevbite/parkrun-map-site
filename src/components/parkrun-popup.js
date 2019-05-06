@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import ParkrunFeatures from './parkrun-features';
+import orange from '@material-ui/core/colors/orange';
 
 const styles = theme => ({
   section1: {
@@ -18,8 +19,14 @@ const styles = theme => ({
     maxHeight: 200,
     overflowY: 'scroll'
   },
-  viewButton: {
-    color: '#fff !important'
+  cancellationsButton: {
+    color: '#fff !important',
+    margin: 5,
+    backgroundColor: orange[500]
+  },
+  viewOnPakrunButton: {
+    color: '#fff !important',
+    margin: 5
   }
 });
 
@@ -44,9 +51,13 @@ export default withStyles(styles)(({ parkrun, classes }) => {
 
 
     <div className={classes.section3}>
-      <Button className={classes.viewButton} target="_blank" href={parkrun.uri} variant="contained" color="primary" fullWidth>
+      {parkrun.cancellations.length > 0 &&
+        <Button className={classes.cancellationsButton} target="_blank" href="https://www.parkrun.org.uk/cancellations/" variant="contained" fullWidth>Cancellations</Button>
+      }
+      <Button className={classes.viewOnPakrunButton} target="_blank" href={parkrun.uri} variant="contained" color="primary" fullWidth>
         View on parkrun
       </Button>
+
     </div>
 
   </Popup >);
