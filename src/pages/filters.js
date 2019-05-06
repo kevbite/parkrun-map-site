@@ -6,9 +6,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Switch from '@material-ui/core/Switch';
-import ChildFriendlyIcon from '@material-ui/icons/ChildFriendly';
-import AccessibleForwardIcon from '@material-ui/icons/AccessibleForward';
 import { useFilters } from '../filters/filters-context';
+import { availableFilters } from '../components/available-filters';
 
 const styles = theme => ({
   header: {
@@ -37,11 +36,6 @@ export default withStyles(styles)(({ classes }) => {
     newFilters[name] = value;
     setFilters(newFilters);
   };
-
-  const availableFilters = [
-    { name: 'Wheelchair Friendly', propName: 'wheelchairFriendly', icon: <AccessibleForwardIcon /> },
-    { name: 'Buggy Friendly', propName: 'buggyFriendly', icon: <ChildFriendlyIcon /> }
-  ];
 
   return (
     <div className={classes.container}>

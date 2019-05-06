@@ -1,10 +1,19 @@
 import React from 'react';
-import ChildFriendlyIcon from '@material-ui/icons/ChildFriendly';
-import AccessibleForwardIcon from '@material-ui/icons/AccessibleForward';
+import { availableFilters } from '../components/available-filters';
+import { withStyles } from '@material-ui/core/styles';
 
-export default ({ features }) => {
+const styles = theme => ({
+  icon: {
+    margin: 5
+  }
+});
+
+export default withStyles(styles)(({ features, classes }) => {
   return (<div>
-    {features.buggyFriendly && <ChildFriendlyIcon />}
-    {features.wheelchairFriendly && <AccessibleForwardIcon />}
+    {availableFilters.filter(x =>
+      features[x.propName]
+    ).map(x => x.icon)}
   </div>);
-};
+});
+
+

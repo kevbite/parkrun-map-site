@@ -1,18 +1,13 @@
 export default function selectParkruns({ parkruns, filters }) {
 
-  if (!filters.wheelchairFriendly && !filters.buggyFriendly) {
-    return parkruns;
-  }
+  const selectedFilters = Object.entries(filters).filter(x => x[1]).map(x => x[0]);
 
   const filteredParkruns = parkruns.filter(parkrun => {
 
-    const selectedWhen = [
-      filters.wheelchairFriendly && parkrun.features.wheelchairFriendly,
-      filters.buggyFriendly && parkrun.features.buggyFriendly
-    ];
+    const selectedWhen = selectedFilters.map(x => parkrun.features[x]);
 
-    return selectedWhen.some(x => x);
+    return selectedWhen.every(x => x);
   });
 
   return filteredParkruns;
-}
+};
