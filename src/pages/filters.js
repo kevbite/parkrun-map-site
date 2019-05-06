@@ -41,16 +41,18 @@ export default withStyles(styles)(({ classes }) => {
     <div className={classes.container}>
       <List subheader={<h1 className={classes.header}>Filters</h1>} className={classes.root}>
         {availableFilters.map(filter => <ListItem key={filter.propName} onClick={onFilterChanged(filter.propName)}>
-          <ListItemIcon>
-            <filter.icon />
-          </ListItemIcon>
-          <ListItemText primary={filter.name} />
-          <ListItemSecondaryAction>
-            <Switch
-              onChange={onFilterChanged(filter.propName)}
-              checked={filters[filter.propName]}
-            />
-          </ListItemSecondaryAction>
+          <>
+            <ListItemIcon>
+              <filter.icon />
+            </ListItemIcon>
+            <ListItemText primary={filter.name} />
+            <ListItemSecondaryAction>
+              <Switch
+                onChange={onFilterChanged(filter.propName)}
+                checked={filters[filter.propName]}
+              />
+            </ListItemSecondaryAction>
+          </>
         </ListItem>)}
       </List>
     </div>

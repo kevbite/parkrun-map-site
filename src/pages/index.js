@@ -63,7 +63,7 @@ export default () => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {parkruns.map(parkrun => (
-        <ParkrunMarker parkrun={parkrun} />
+        <ParkrunMarker key={parkrun.id} parkrun={parkrun} />
       ))}
     </Map>
   )
