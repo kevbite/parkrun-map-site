@@ -6,14 +6,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import WarningIcon from '@material-ui/icons/Warning';
 
-function generate(element) {
-  return [0, 1, 2].map(value =>
-    React.cloneElement(element, {
-      key: value,
-    }),
-  );
-}
-
 const styles = theme => ({
   root: {
     flexGrow: 1,
