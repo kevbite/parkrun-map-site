@@ -5,9 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   container: {
-    //display: 'flex',
     padding: 24,
-    //justifyContent: 'center',
     marginBottom: 56
   }
 });
