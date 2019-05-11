@@ -85,14 +85,14 @@ export function useLocation() {
       return;
     }
 
-    dispatch({ type: 'SET_LOCATION', location: { latitude, longitude } })
+    dispatch({ type: 'SET_LOCATION', location: { latitude, longitude } });
   };
 
   const setZoom = ({ zoom }) => {
     if (state.zoom === zoom) {
       return;
     }
-    dispatch({ type: 'SET_ZOOM', zoom })
+    dispatch({ type: 'SET_ZOOM', zoom });
   };
 
   return {

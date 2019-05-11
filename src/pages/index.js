@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { Map, TileLayer } from "react-leaflet"
 import { useParkruns } from "../parkruns/parkruns-context"
 import { useLocation } from '../location/location-context';
@@ -6,13 +6,6 @@ import { useFilteredParkruns } from '../hooks/filtered-parkruns';
 import ParkrunMarker from '../components/parkrun-marker';
 
 export default () => {
-  const [mapBounds, setMapBounds] = useState({
-    south: 0,
-    east: 0,
-    north: 0,
-    west: 0
-  });
-
   const {
     requestParkruns
   } = useParkruns();
@@ -23,31 +16,36 @@ export default () => {
     setZoom
   } = useLocation();
 
+  const mapRef = useRef(null);
+
   const {
     parkruns
   } = useFilteredParkruns();
 
   const position = [latitude, longitude]
 
-  const handleOnMoveend = async e => {
-    const bounds = e.target.getBounds();
+  const handleOnDragend = async e => {
     const center = e.target.getCenter();
-
-    setZoom({ zoom: e.target.getZoom() });
     setLocation({ latitude: center.lat, longitude: center.lng });
-    setMapBounds({
-      south: bounds.getSouth(),
-      east: bounds.getEast(),
-      north: bounds.getNorth(),
-      west: bounds.getWest()
-    });
+  };
+
+  const handleOnZoomend = async e => {
+    setZoom({ zoom: e.target.getZoom() });
   };
 
   useEffect(() => {
-    requestParkruns(mapBounds);
-
+    const map = mapRef.current;
+    if (map != null) {
+      const bounds = map.leafletElement.getBounds();
+      requestParkruns({
+        south: bounds.getSouth(),
+        east: bounds.getEast(),
+        north: bounds.getNorth(),
+        west: bounds.getWest()
+      });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mapBounds.south, mapBounds.east, mapBounds.north, mapBounds.west]);
+  }, [latitude, longitude, zoom]);
 
   if (typeof window === 'undefined') {
     return null;
@@ -55,8 +53,9 @@ export default () => {
 
   return (
     <Map
-      debounceMoveend={true}
-      onMoveend={handleOnMoveend}
+      ref={mapRef}
+      onDragend={handleOnDragend}
+      onZoomend={handleOnZoomend}
       center={position}
       zoom={zoom}
       style={{

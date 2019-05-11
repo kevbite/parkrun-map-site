@@ -54,7 +54,7 @@ const shouldSendRequest = ({ state: { isLoading, searchedPolygon }, bounds: { so
   const polygon = bboxPolygon([south, west, north, east]);
 
   if (!isLoading && searchedPolygon) {
-    if (searchedPolygon.type === "MultiPolygon") {
+    if (searchedPolygon.geometry.type === "MultiPolygon") {
       if (searchedPolygon.geometry.coordinates.some(x => booleanContains(turfPolygon(x), polygon))) {
         return false;
       }
