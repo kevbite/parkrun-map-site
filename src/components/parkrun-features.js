@@ -10,13 +10,13 @@ const styles = theme => ({
 });
 
 export default withStyles(styles)(({ features, classes }) => {
-  return (<div>
+  return (<>
     {availableFilters.filter(x =>
       features[x.propName]
     ).map(x => <Tooltip key={x.propName} disableFocusListener disableTouchListener title={x.name}>
       <x.icon className={classes.icon} />
     </Tooltip>)}
-  </div>);
+  </>);
 });
 
 

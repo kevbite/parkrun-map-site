@@ -7,6 +7,7 @@ import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import ParkrunFeatures from './parkrun-features';
 import orange from '@material-ui/core/colors/orange';
+import ParkrunTerrain from './parkrun-terrain';
 
 const styles = theme => ({
   section1: {
@@ -44,6 +45,7 @@ export default withStyles(styles)(({ parkrun, classes }) => {
 
 
     <div className={classes.section2}>
+      <ParkrunTerrain terrain={parkrun.course.terrain} />
       <ParkrunFeatures features={parkrun.features} />
     </div>
 
