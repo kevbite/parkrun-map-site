@@ -49,6 +49,7 @@ export function ParkrunsProvider(props) {
   const value = React.useMemo(() => [state, dispatch], [state])
   return <ParkrunsContext.Provider value={value} {...props} />
 }
+
 const shouldSendRequest = ({ state: { isLoading, searchedPolygon }, bounds: { south, west, north, east } }) => {
   const polygon = bboxPolygon([south, west, north, east]);
 
@@ -67,6 +68,7 @@ const shouldSendRequest = ({ state: { isLoading, searchedPolygon }, bounds: { so
 
   return true;
 }
+
 export function useParkruns() {
   const context = React.useContext(ParkrunsContext);
   if (!context) {
