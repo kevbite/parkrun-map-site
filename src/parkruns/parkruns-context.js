@@ -1,4 +1,8 @@
 import React from "react"
+import union from '@turf/union';
+import bboxPolygon from '@turf/bbox-polygon';
+import booleanContains from '@turf/boolean-contains';
+import { polygon as turfPolygon } from "@turf/helpers";
 
 const ParkrunsContext = React.createContext();
 
@@ -8,9 +12,12 @@ const receiveParkrunsType = "RECEIVE_PARKRUNS";
 function parkrunsReducer(state, action) {
   switch (action.type) {
     case requestParkrunsType: {
+      const searchedPolygon = union(state.searchedPolygon || action.polygon, action.polygon);
+
       return {
         ...state,
         isLoading: true,
+        searchedPolygon
       };
     }
     case receiveParkrunsType: {
@@ -42,9 +49,24 @@ export function ParkrunsProvider(props) {
   const value = React.useMemo(() => [state, dispatch], [state])
   return <ParkrunsContext.Provider value={value} {...props} />
 }
+const shouldSendRequest = ({ state: { isLoading, searchedPolygon }, bounds: { south, west, north, east } }) => {
+  const polygon = bboxPolygon([south, west, north, east]);
 
-const requests = [];
+  if (!isLoading && searchedPolygon) {
+    if (searchedPolygon.type === "MultiPolygon") {
+      if (searchedPolygon.geometry.coordinates.some(x => booleanContains(turfPolygon(x), polygon))) {
+        return false;
+      }
+    }
+    else if (searchedPolygon.geometry.type === "Polygon") {
+      if (booleanContains(searchedPolygon, polygon)) {
+        return false;
+      }
+    }
+  }
 
+  return true;
+}
 export function useParkruns() {
   const context = React.useContext(ParkrunsContext);
   if (!context) {
@@ -55,18 +77,16 @@ export function useParkruns() {
 
   const requestParkruns = async ({ south, west, north, east }) => {
 
-    if (requests.some(x => south >= x.south && west >= x.west && north <= x.north && east <= x.east)) {
+    if (!shouldSendRequest({ state, bounds: { south, west, north, east } })) {
       return;
     }
 
-    south = Math.floor(south * 10) / 10;
-    west = Math.floor(west * 10) / 10;
-    north = Math.ceil(north * 10) / 10;
-    east = Math.ceil(east * 10) / 10;
+    south = Math.floor(south);
+    west = Math.floor(west);
+    north = Math.ceil(north);
+    east = Math.ceil(east);
 
-    requests.push({ south, west, north, east });
-
-    dispatch({ type: requestParkrunsType });
+    dispatch({ type: requestParkrunsType, polygon: bboxPolygon([south, west, north, east]) });
 
     const url = `https://parkrun-map.azurewebsites.net/api/parkruns/geobox?lat=${south}&lon=${west}&lat=${north}&lon=${east}`;
     const response = await fetch(url);

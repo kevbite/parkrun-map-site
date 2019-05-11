@@ -6,6 +6,7 @@ import { useFilteredParkruns } from '../hooks/filtered-parkruns';
 import ParkrunMarker from '../components/parkrun-marker';
 
 export default () => {
+
   const {
     requestParkruns
   } = useParkruns();
@@ -26,6 +27,7 @@ export default () => {
     const bounds = e.target.getBounds();
     const center = e.target.getCenter();
 
+    setZoom({ zoom: e.target.getZoom() });
     setLocation({ latitude: center.lat, longitude: center.lng });
 
     await requestParkruns({
@@ -36,18 +38,14 @@ export default () => {
     });
   };
 
-  const handleOnZoomed = (e) => {
-    setZoom({ zoom: e.target.getZoom() });
-
-  };
   if (typeof window === 'undefined') {
     return null;
   }
+
   return (
     <Map
       debounceMoveend={true}
       onMoveend={handleOnMoveend}
-      onzoomend={handleOnZoomed}
       center={position}
       zoom={zoom}
       style={{
