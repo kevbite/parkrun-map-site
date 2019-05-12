@@ -14,7 +14,7 @@ const styles = theme => ({
   }
 });
 
-const terrainIcons = {
+export const terrainIcons = {
   "Road": props => <RoadIcon {...props} />,
   "Grass": props => <TreeIcon {...props} />,
   "Trail": props => <TerrainIcon {...props} />,

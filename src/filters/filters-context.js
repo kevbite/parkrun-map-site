@@ -1,5 +1,6 @@
 import React from "react"
 import { availableFilters } from '../components/available-filters';
+import { terrainIcons } from '../components/parkrun-terrain';
 
 const FiltersContext = React.createContext();
 
@@ -22,11 +23,14 @@ function filtersReducer(state, action) {
 
 export function FiltersProvider(props) {
   const [state, dispatch] = React.useReducer(filtersReducer, {
-    filters: availableFilters.reduce((filters, filter) => {
-      filters[filter.propName] = false;
+    filters: {
+      features: availableFilters.reduce((filters, filter) => {
+        filters[filter.propName] = false;
 
-      return filters;
-    }, {})
+        return filters;
+      }, {}),
+      terrain: []
+    }
   });
 
   const value = React.useMemo(() => [state, dispatch], [state]);
