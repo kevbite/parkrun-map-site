@@ -1,3 +1,1 @@
-navigator.serviceWorker.ready.then(registration => {
-  registration.unregister();
-});
+self.registration.unregister({ immediate: true })
