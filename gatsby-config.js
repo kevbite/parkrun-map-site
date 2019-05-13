@@ -8,6 +8,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-sitemap`,
+    `gatsby-plugin-robots-txt`,
     `gatsby-plugin-material-ui`,
     `gatsby-plugin-layout`,
     `gatsby-plugin-react-leaflet`,
