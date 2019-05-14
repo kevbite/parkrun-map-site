@@ -21,7 +21,7 @@ export default (props) => {
 
   const { state: { filters }, setFilters } = useFilters();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => setFilters({ ...filters, wheelchairFriendly: true }), []);
+  useEffect(() => setFilters({ ...filters, features: { ...filters.features, wheelchairFriendly: true } }), []);
 
   const title = "Wheelchair friendly parkruns";
   const description = "Find wheelchair friendly parkruns";

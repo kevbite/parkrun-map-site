@@ -21,7 +21,7 @@ export default (props) => {
 
   const { state: { filters }, setFilters } = useFilters();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => setFilters({ ...filters, buggyFriendly: true }), []);
+  useEffect(() => setFilters({ ...filters, features: { ...filters.features, buggyFriendly: true } }), []);
 
   const title = "Buggy friendly parkruns";
   const description = "Find buggy friendly parkruns";
