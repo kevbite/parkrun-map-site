@@ -9,6 +9,7 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction"
 import MapIcon from "@material-ui/icons/Map";
 import InfoIcon from "@material-ui/icons/Info";
 import FilterListIcon from "@material-ui/icons/FilterList";
+import FilterBadge from './filter-badge';
 
 const styles = {
   bottomPanel: {
@@ -58,7 +59,9 @@ export default withStyles(styles)(({ classes, pathname }) => {
       <BottomNavigationAction
         label="Filters"
         value="/filters/"
-        icon={<FilterListIcon />}
+        icon={<FilterBadge>
+          <FilterListIcon />
+        </FilterBadge>}
       />
       <BottomNavigationAction
         label="Information"
