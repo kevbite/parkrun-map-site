@@ -9,6 +9,7 @@ import Switch from '@material-ui/core/Switch';
 import { useFilters } from '../filters/filters-context';
 import { availableFilters } from '../components/available-filters';
 import { terrainIcons } from '../components/parkrun-terrain';
+import ReactGA from 'react-ga';
 
 const styles = theme => ({
   header: {
@@ -32,6 +33,11 @@ export default withStyles(styles)(({ classes }) => {
   const onFeatureFilterChanged = name => () => {
     const value = !filters.features[name];
 
+    ReactGA.event({
+      category: 'Filters',
+      action: `Features.${name}.${value ? 'On' : 'Off'}`
+    });
+
     const newFeatures = {
       ...filters.features
     };
@@ -46,8 +52,14 @@ export default withStyles(styles)(({ classes }) => {
   const onTerrainFilterChanged = name => () => {
 
     const terrain = filters.terrain.filter(x => x !== name);
+    const turnOn = !filters.terrain.includes(name);
 
-    if (!filters.terrain.includes(name)) {
+    ReactGA.event({
+      category: 'Filters',
+      action: `Terrain.${name}.${turnOn ? 'On' : 'Off'}`
+    });
+
+    if (turnOn) {
       terrain.push(name);
     }
 
@@ -55,6 +67,8 @@ export default withStyles(styles)(({ classes }) => {
       ...filters,
       terrain
     };
+
+
 
     setFilters(newFilters);
   };
