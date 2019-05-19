@@ -23,6 +23,8 @@ exports.createPages = ({ graphql, actions: { createPage } }) => {
   ).then(result => {
     result.data.allInternalParkruns.edges.forEach(({ node }) => {
 
+      if (!node.uri)
+        return;
       const split = node.uri.split('.');
       const parkrunPath = split[split.length - 1];
       const pagePath = `parkruns/${parkrunPath}`;
