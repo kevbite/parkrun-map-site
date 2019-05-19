@@ -5,6 +5,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import WarningIcon from '@material-ui/icons/Warning';
+import CancellationsButton from './cancellations-button';
 
 const styles = theme => ({
   root: {
@@ -19,11 +20,11 @@ const styles = theme => ({
   },
 });
 
-export default withStyles(styles)(({ classes, cancellations }) => {
+export default withStyles(styles)(({ classes, cancellations, header }) => {
 
   return (
     <div className={classes.demo}>
-      <List>
+      <List subheader={header}>
         {cancellations.map(x =>
           <ListItem key={new Date(x.date).getTime()}>
             <ListItemIcon>
@@ -35,5 +36,7 @@ export default withStyles(styles)(({ classes, cancellations }) => {
           </ListItem>)
         }
       </List>
-    </div>)
+      <CancellationsButton />
+    </div>
+  )
 });

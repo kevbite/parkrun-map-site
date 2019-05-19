@@ -31,6 +31,53 @@ module.exports = {
         trackingId: "UA-131581490-1"
       }
     },
-    `gatsby-plugin-offline`
+    `gatsby-plugin-offline`,
+    {
+      resolve: 'gatsby-source-apiserver',
+      options: {
+        typePrefix: 'internal__',
+        url: `https://parkrun-map.azurewebsites.net/api/parkruns/geobox?lat=-180&lon=-90&lat=180&lon=90`,
+        method: 'get',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        name: `parkruns`,
+        schemaType: {
+          "id": "String",
+          "name": "String",
+          "uri": "String",
+          "lat": 51.718796,
+          "lon": -3.460089,
+          "cancellations": [
+            { "date": "String", "reason": "String" }
+          ],
+          "course": {
+            "description": "String",
+            "googleMapIds": ["String"],
+            "terrain": ["String"]
+          },
+          "features": {
+            "wheelchairFriendly": true,
+            "buggyFriendly": true,
+            "visuallyImpairedFriendly": true,
+            "toilets": true,
+            "dogsAllowed": null,
+            "cafe": null,
+            "postRunCoffee": null,
+            "drinkingFountain": null,
+            "changingRooms": null,
+            "lockers": null,
+            "showers": null,
+            "bagDrop": null,
+            "babyChangingFacilities": null,
+            "carParking": null,
+            "cycleParking": null,
+            "carParkingOptions": ["String"],
+            "cycleParkingOptions": ["String"],
+            "recommendedBuggy": ["String"]
+          }
+        }
+      }
+    }
   ],
 }

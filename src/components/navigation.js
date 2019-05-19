@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { withStyles } from "@material-ui/core/styles"
-import { navigate } from "gatsby"
+import { navigate, withPrefix } from "gatsby"
 import { useParkruns } from "../parkruns/parkruns-context"
 import LinearProgress from '@material-ui/core/LinearProgress';
 
@@ -8,6 +8,7 @@ import BottomNavigation from "@material-ui/core/BottomNavigation"
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction"
 import MapIcon from "@material-ui/icons/Map";
 import InfoIcon from "@material-ui/icons/Info";
+import PlaceIcon from "@material-ui/icons/Place";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import FilterBadge from './filter-badge';
 
@@ -22,15 +23,16 @@ const styles = {
 
 export default withStyles(styles)(({ classes, pathname }) => {
 
-  const [route, setRoute] = useState(() => {
+  let navValue = withPrefix(pathname);
 
-    if (['/buggy-friendly/', '/wheelchair-friendly/'].some(x => x === pathname)) {
-      return '/';
-    }
+  if (['/buggy-friendly/', '/wheelchair-friendly/'].map(withPrefix).some(x => x === pathname)) {
+    navValue = '/';
+  }
 
-    return pathname;
-  });
-
+  const parkrunSelected = navValue.startsWith(withPrefix('/parkruns/'));
+  if (parkrunSelected) {
+    navValue = '/parkruns/*';
+  }
 
   const navigationChanged = value => {
     const routeList = ["/", "/filters/", "/about/"];
@@ -38,7 +40,6 @@ export default withStyles(styles)(({ classes, pathname }) => {
     const route = routeList.find(x => x === value);
     if (route) {
       navigate(route);
-      setRoute(route);
     }
   };
 
@@ -49,13 +50,18 @@ export default withStyles(styles)(({ classes, pathname }) => {
     {isLoading && <LinearProgress />}
     <BottomNavigation
       onChange={(_, value) => navigationChanged(value)}
-      value={route}
+      value={navValue}
     >
       <BottomNavigationAction
         label="parkruns"
         value="/"
         icon={<MapIcon />}
       />
+      {parkrunSelected && <BottomNavigationAction
+        label="parkrun"
+        value="/parkruns/*"
+        icon={<PlaceIcon />}
+      />}
       <BottomNavigationAction
         label="Filters"
         value="/filters/"

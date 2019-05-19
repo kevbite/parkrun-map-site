@@ -6,8 +6,9 @@ import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import ParkrunFeatures from './parkrun-features';
-import orange from '@material-ui/core/colors/orange';
 import ParkrunTerrain from './parkrun-terrain';
+import CancellationsButton from './cancellations-button';
+import { Link } from "gatsby"
 
 const styles = theme => ({
   section1: {
@@ -20,16 +21,19 @@ const styles = theme => ({
     maxHeight: 200,
     overflowY: 'scroll'
   },
-  cancellationsButton: {
-    color: '#fff !important',
-    margin: 5,
-    backgroundColor: orange[500]
-  },
-  viewOnPakrunButton: {
+  viewMoreButton: {
     color: '#fff !important',
     margin: 5
   }
 });
+
+const buildPath = ({ uri }) => {
+  const split = uri.split('.');
+  const parkrunPath = split[split.length - 1];
+  const pagePath = `parkruns/${parkrunPath}`;
+
+  return pagePath;
+};
 
 export default withStyles(styles)(({ parkrun, classes }) => {
 
@@ -53,9 +57,6 @@ export default withStyles(styles)(({ parkrun, classes }) => {
       <div>
         <Divider variant="middle" />
         <ParkrunCancellations cancellations={parkrun.cancellations} />
-        <Button className={classes.cancellationsButton} target="_blank" href="https://www.parkrun.org.uk/cancellations/" variant="contained" fullWidth>
-          View All Cancellations
-        </Button>
       </div>
     }
 
@@ -63,8 +64,8 @@ export default withStyles(styles)(({ parkrun, classes }) => {
 
 
     <div className={classes.section3}>
-      <Button className={classes.viewOnPakrunButton} target="_blank" href={parkrun.uri} variant="contained" color="primary" fullWidth>
-        View on parkrun
+      <Button component={Link} className={classes.viewMoreButton} to={buildPath(parkrun)} variant="contained" color="primary" fullWidth>
+        View more
       </Button>
 
     </div>

@@ -8,7 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Switch from '@material-ui/core/Switch';
 import { useFilters } from '../filters/filters-context';
 import { availableFilters } from '../components/available-filters';
-import { terrainIcons } from '../components/parkrun-terrain';
+import { terrainIcons } from '../components/terrain-icon';
 import ReactGA from 'react-ga';
 
 const styles = theme => ({
