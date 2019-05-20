@@ -30,7 +30,7 @@ module.exports = {
         trackingId: "UA-131581490-1"
       }
     },
-    `gatsby-plugin-offline`,
+    `gatsby-plugin-remove-serviceworker`,
     {
       resolve: 'gatsby-source-apiserver',
       options: {
