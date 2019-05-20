@@ -1,7 +1,23 @@
-const path = require(`path`)
+const path = require(`path`);
 
 exports.onCreateNode = ({ node }) => {
-  console.log(node.internal.type)
+  console.log(node.internal.type);
+};
+
+
+exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+  if (stage === "build-html") {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /react-leaflet|leaflet/,
+            use: loaders.null(),
+          }
+        ]
+      }
+    })
+  }
 };
 
 exports.createPages = ({ graphql, actions: { createPage } }) => {

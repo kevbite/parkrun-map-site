@@ -11,7 +11,6 @@ module.exports = {
     `gatsby-plugin-robots-txt`,
     `gatsby-plugin-material-ui`,
     `gatsby-plugin-layout`,
-    `gatsby-plugin-react-leaflet`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-manifest`,
