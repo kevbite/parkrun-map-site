@@ -99,7 +99,6 @@ export function useParkruns() {
 
   return {
     state,
-    dispatch,
     requestParkruns,
   };
 }

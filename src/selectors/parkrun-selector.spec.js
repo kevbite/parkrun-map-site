@@ -114,3 +114,37 @@ describe("Multiple Terrain filters", () => {
     expect(actual).toEqual([parkruns[2]]);
   });
 });
+
+
+describe("Distance from user location", () => {
+  it("Should return distance in kilometers from user location", () => {
+    const parkruns = [
+      {
+        name: "York",
+        lat: 53.935375,
+        lon: -1.101379
+      },
+      {
+        name: "Heslington",
+        lat: 53.949319,
+        lon: -1.01799
+      }
+    ];
+
+    // York Minister
+    const userLocation = {
+      location:
+        { latitude: 53.962318, longitude: -1.081923 }
+    };
+
+    const filters = {};
+
+    const actual = selectParkruns({ parkruns, filters, userLocation });
+
+    expect(actual).toMatchObject([{
+      distance: 3.69
+    }, {
+      distance: 7.25
+    }]);
+  });
+});

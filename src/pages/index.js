@@ -4,6 +4,7 @@ import { useParkruns } from "../parkruns/parkruns-context"
 import { useLocation } from '../location/location-context';
 import { useFilteredParkruns } from '../hooks/filtered-parkruns';
 import ParkrunMarker from '../components/parkrun-marker';
+import UserLocationMarker from '../components/user-location-marker';
 
 export default () => {
   const {
@@ -11,7 +12,7 @@ export default () => {
   } = useParkruns();
 
   const {
-    state: { location: { latitude, longitude }, zoom },
+    state: { location: { latitude, longitude }, zoom, userLocation },
     setLocation,
     setZoom
   } = useLocation();
@@ -73,6 +74,7 @@ export default () => {
       {parkruns.map(parkrun => (
         <ParkrunMarker key={parkrun.id} parkrun={parkrun} />
       ))}
+      {userLocation && <UserLocationMarker location={userLocation} />}
     </Map>
   )
 }

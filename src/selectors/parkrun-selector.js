@@ -1,4 +1,25 @@
-export default function selectParkruns({ parkruns, filters }) {
+import turfDistance from '@turf/distance';
+import { point } from "@turf/helpers";
+
+export default function selectParkruns({ parkruns, filters, userLocation: { location = undefined } = {} }) {
+
+  const userPoint = location ? point([location.latitude, location.longitude]) : null;
+
+  const enrichParkrunData = (parkrun) => {
+
+    const parkrunPoint = point([parkrun.lat, parkrun.lon]);
+
+    let distance;
+    if (userPoint) {
+      distance = turfDistance(userPoint, parkrunPoint, { units: 'kilometers' });
+      distance = Math.round(distance * 100) / 100;
+    }
+
+    return {
+      ...parkrun,
+      distance
+    };
+  }
 
   const selectedFeatureFilters = Object.entries(filters.features || []).filter(x => x[1]).map(x => x[0]);
 
@@ -16,5 +37,5 @@ export default function selectParkruns({ parkruns, filters }) {
     return selectedWhen.every(x => x) && matchesTerrainFilters();
   });
 
-  return filteredParkruns;
+  return filteredParkruns.map(enrichParkrunData);
 };

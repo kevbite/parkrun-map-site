@@ -24,6 +24,10 @@ const styles = theme => ({
   viewMoreButton: {
     color: '#fff !important',
     margin: 5
+  },
+  distance: {
+    fontSize: '1rem',
+    color: theme.palette.text.secondary
   }
 });
 
@@ -40,7 +44,7 @@ export default withStyles(styles)(({ parkrun, classes }) => {
   return (<Popup>
     <div className={classes.section1}>
       <Typography gutterBottom variant="h4">
-        {parkrun.name}
+        {parkrun.name} {parkrun.distance && <span className={classes.distance}>{parkrun.distance}km</span>}
       </Typography>
       <Typography className={classes.courseDescription} color="textSecondary">
         {parkrun.course.description}

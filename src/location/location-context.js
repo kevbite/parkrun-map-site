@@ -19,6 +19,10 @@ const reducer = (state, action) => {
   if (action.type === receiveLocationType) {
     return {
       ...state,
+      userLocation: {
+        location: action.location,
+        accuracy: action.accuracy
+      },
       location: action.location,
       isLoading: false,
       isLoaded: true
@@ -49,9 +53,13 @@ const requestLocation = (dispatch) => {
   if (navigator && navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       position => {
-        const location = { latitude: position.coords.latitude, longitude: position.coords.longitude };
+        const location = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        };
+        const accuracy = position.coords.accuracy;
 
-        dispatch({ type: receiveLocationType, location });
+        dispatch({ type: receiveLocationType, location, accuracy });
       }
     );
   }

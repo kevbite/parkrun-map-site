@@ -23,3 +23,8 @@ export const redIcon = typeof window === 'undefined' ? null : L.icon({
   ...defaultOptions,
   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png'
 });
+
+export const blueIcon = typeof window === 'undefined' ? null : L.icon({
+  ...defaultOptions,
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png'
+});
