@@ -5,6 +5,7 @@ import { useLocation } from '../location/location-context';
 import { useFilteredParkruns } from '../hooks/filtered-parkruns';
 import ParkrunMarker from '../components/parkrun-marker';
 import UserLocationMarker from '../components/user-location-marker';
+import Search from '../components/search';
 
 export default () => {
   const {
@@ -53,28 +54,32 @@ export default () => {
   }
 
   return (
-    <Map
-      ref={mapRef}
-      onDragend={handleOnDragend}
-      onZoomend={handleOnZoomend}
-      center={position}
-      zoom={zoom}
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        bottom: 56,
-        width: "100%",
-      }}
-    >
-      <TileLayer
-        attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      {parkruns.map(parkrun => (
-        <ParkrunMarker key={parkrun.id} parkrun={parkrun} />
-      ))}
-      {userLocation && <UserLocationMarker location={userLocation} />}
-    </Map>
+    <div>
+      <Search />
+      <Map
+        ref={mapRef}
+        onDragend={handleOnDragend}
+        onZoomend={handleOnZoomend}
+        center={position}
+        zoom={zoom}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          bottom: 56,
+          width: "100%",
+        }}
+      >
+        <TileLayer
+          attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        {parkruns.map(parkrun => (
+          <ParkrunMarker key={parkrun.id} parkrun={parkrun} />
+        ))}
+        {userLocation && <UserLocationMarker location={userLocation} />}
+      </Map>
+    </div>
+
   )
 }

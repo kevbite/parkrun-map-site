@@ -20,6 +20,7 @@
     "@turf/distance": "^6.0.1",
     "@turf/helpers": "^6.1.4",
     "@turf/union": "^6.0.3",
+    "algolia-places-react": "^1.4.1",
     "gatsby": "^2.3.27",
     "gatsby-plugin-google-analytics": "^2.0.19",
     "gatsby-plugin-layout": "^1.0.15",
