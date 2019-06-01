@@ -3,18 +3,16 @@ import { useLocation } from '../location/location-context';
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
-const styles = theme => ({
-  searchWrapper: {
-    zIndex: 999,
-    position: 'absolute',
-    top: 10,
-    left: 10,
-    right: 10,
-    maxWidth: 350
-  }
-});
+const styles = {
+  zIndex: 999,
+  position: 'absolute',
+  top: 10,
+  left: 10,
+  right: 10,
+  maxWidth: 350
+};
 
-export default withStyles(styles)(({ classes }) => {
+export default ({ classes }) => {
   const { setLocation } = useLocation();
   const onChange = ({ suggestion: { latlng } }) => {
     const { lat: latitude, lng: longitude } = latlng;
@@ -22,7 +20,7 @@ export default withStyles(styles)(({ classes }) => {
     setLocation({ latitude, longitude });
   };
   return (
-    <div className={classes.searchWrapper}>
+    <div style={styles}>
       <AlgoliaPlaces
         placeholder='Type a city or postcode'
         options={{
@@ -35,4 +33,4 @@ export default withStyles(styles)(({ classes }) => {
       />
     </div>
   );
-});
+};
