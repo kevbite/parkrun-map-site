@@ -41,7 +41,9 @@ const buildPath = ({ uri }) => {
 
 export default withStyles(styles)(({ parkrun, classes }) => {
 
-  return (<Popup>
+  return (<Popup
+    autoPanPaddingTopLeft={[5, 55]}
+    autoPanPaddingBottomRight={[5, 5]}>
     <div className={classes.section1}>
       <Typography gutterBottom variant="h4">
         {parkrun.name} {parkrun.distance && <span className={classes.distance}>{parkrun.distance}km</span>}
