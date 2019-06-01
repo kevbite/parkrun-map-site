@@ -7,10 +7,10 @@ const styles = theme => ({
   searchWrapper: {
     zIndex: 999,
     position: 'absolute',
-    top: '10px',
-    left: '50px',
-    right: '10px',
-    maxWidth: '300px'
+    top: 10,
+    left: 10,
+    right: 10,
+    maxWidth: 350
   }
 });
 

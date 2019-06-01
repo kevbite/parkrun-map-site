@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { Map, TileLayer } from "react-leaflet"
+import { Map, TileLayer, ZoomControl } from "react-leaflet"
 import { useParkruns } from "../parkruns/parkruns-context"
 import { useLocation } from '../location/location-context';
 import { useFilteredParkruns } from '../hooks/filtered-parkruns';
@@ -62,6 +62,7 @@ export default () => {
         onZoomend={handleOnZoomend}
         center={position}
         zoom={zoom}
+        zoomControl={false}
         style={{
           position: "absolute",
           top: 0,
@@ -70,6 +71,7 @@ export default () => {
           width: "100%",
         }}
       >
+        <ZoomControl position={'bottomright'} />
         <TileLayer
           attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
