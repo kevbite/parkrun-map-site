@@ -12,10 +12,10 @@ import { Link } from "gatsby"
 
 const styles = theme => ({
   section1: {
-    margin: `${theme.spacing.unit * 3}px ${theme.spacing.unit * 2}px`,
+    margin: theme.spacing(3, 2),
   },
   section2: {
-    margin: theme.spacing.unit * 2,
+    margin: theme.spacing(2),
   },
   courseDescription: {
     maxHeight: 200,
