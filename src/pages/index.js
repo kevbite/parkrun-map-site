@@ -26,12 +26,18 @@ export default () => {
 
   const position = [latitude, longitude]
 
+  const closePopups = () => {
+    mapRef.current.leafletElement.closePopup();
+  };
+
   const handleOnDragend = async e => {
+    closePopups();
     const center = e.target.getCenter();
     setLocation({ latitude: center.lat, longitude: center.lng });
   };
 
   const handleOnZoomend = async e => {
+    closePopups();
     setZoom({ zoom: e.target.getZoom() });
   };
 
