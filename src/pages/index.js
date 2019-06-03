@@ -20,15 +20,21 @@ export default () => {
 
   const mapRef = useRef(null);
 
+  const closePopups = () => {
+    if (mapRef.current) {
+      mapRef.current.leafletElement.closePopup();
+    }
+  };
+
+  useEffect(() => {
+    closePopups();
+  }, [latitude, longitude, zoom])
+
   const {
     parkruns
   } = useFilteredParkruns();
 
   const position = [latitude, longitude]
-
-  const closePopups = () => {
-    mapRef.current.leafletElement.closePopup();
-  };
 
   const handleOnDragend = async e => {
     closePopups();
