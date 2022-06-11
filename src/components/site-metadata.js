@@ -24,7 +24,7 @@ export default ({ pathname }) => {
 
   return (
     <Helmet defaultTitle={title} titleTemplate={`%s | ${title}`}>
-      <html lang="en" />
+      <html lang="en" translate="no" />
       <link rel="canonical" href={`${siteUrl}${pathname}`} />
       <meta name="docsearch:version" content="2.0" />
       <meta
