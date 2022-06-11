@@ -25,10 +25,6 @@ export default withStyles(styles)(({ classes, pathname }) => {
 
   let navValue = withPrefix(pathname);
 
-  if (['/buggy-friendly/', '/wheelchair-friendly/'].map(withPrefix).some(x => x === pathname)) {
-    navValue = '/';
-  }
-
   const parkrunSelected = navValue.startsWith(withPrefix('/parkruns/'));
   if (parkrunSelected) {
     navValue = '/parkruns/*';
