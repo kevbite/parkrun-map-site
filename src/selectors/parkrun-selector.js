@@ -7,7 +7,7 @@ export default function selectParkruns({ parkruns, filters, userLocation: { loca
 
   const enrichParkrunData = (parkrun) => {
 
-    const parkrunPoint = point([parkrun.lat, parkrun.lon]);
+    const parkrunPoint = point([parkrun.lat || 0, parkrun.lon || 0]);
 
     let distance;
     if (userPoint) {
