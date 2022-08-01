@@ -1,7 +1,6 @@
-import AlgoliaPlaces from 'algolia-places-react';
 import { useLocation } from '../location/location-context';
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import React, { useEffect, useState } from 'react';
+import GooglePlacesAutocomplete, { geocodeByPlaceId } from 'react-google-places-autocomplete';
 
 const styles = {
   zIndex: 999,
@@ -13,23 +12,28 @@ const styles = {
 };
 
 export default ({ classes }) => {
+  const [value, setValue] = useState(null);
   const { setLocation } = useLocation();
-  const onChange = ({ suggestion: { latlng } }) => {
-    const { lat: latitude, lng: longitude } = latlng;
-    console.log(`{ ${latitude}, ${longitude} }`);
-    setLocation({ latitude, longitude });
-  };
+
+  useEffect(() => {
+    (async () => {
+      if(value){
+        const [{geometry: {location: { lat, lng }}}] = await geocodeByPlaceId(value.value.place_id)
+        const latitude = lat();
+        const longitude = lng();
+        setLocation({ latitude, longitude });
+      }
+    })();
+  }, [setLocation, value])
+
   return (
     <div style={styles}>
-      <AlgoliaPlaces
-        placeholder='Type a city or postcode'
-        options={{
-          appId: 'plYMZAXKIUOD',
-          apiKey: '7847fa0234915a5b956c4bc6cc28a1b9',
-          type: 'city',
-          useDeviceLocation: true
+      <GooglePlacesAutocomplete
+        apiKey="AIzaSyAvs9kC7xNv1oQbkjzeC106u8s43r5HoXA"
+        selectProps={{
+          value,
+          onChange: setValue,
         }}
-        onChange={onChange}
       />
     </div>
   );
