@@ -1,5 +1,5 @@
 import { useLocation } from '../location/location-context';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import GooglePlacesAutocomplete, { geocodeByPlaceId } from 'react-google-places-autocomplete';
 
 const styles = {
@@ -11,20 +11,20 @@ const styles = {
   maxWidth: 350
 };
 
-export default ({ classes }) => {
+export default () => {
   const [value, setValue] = useState(null);
   const { setLocation } = useLocation();
 
-  useEffect(() => {
-    (async () => {
-      if(value){
-        const [{geometry: {location: { lat, lng }}}] = await geocodeByPlaceId(value.value.place_id)
-        const latitude = lat();
-        const longitude = lng();
-        setLocation({ latitude, longitude });
-      }
-    })();
-  }, [setLocation, value])
+
+  const onChange = async (value) =>{
+    const [{geometry: {location: { lat, lng }}}] = await geocodeByPlaceId(value.value.place_id)
+
+    const latitude = lat();
+    const longitude = lng();
+
+    setValue(value);
+    setLocation({ latitude, longitude });
+  }
 
   return (
     <div style={styles}>
@@ -32,7 +32,7 @@ export default ({ classes }) => {
         apiKey="AIzaSyAvs9kC7xNv1oQbkjzeC106u8s43r5HoXA"
         selectProps={{
           value,
-          onChange: setValue,
+          onChange,
         }}
       />
     </div>

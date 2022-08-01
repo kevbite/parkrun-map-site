@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useCallback, useMemo } from "react"
 
 const requestLocationType = 'REQUEST_LOCATION';
 const receiveLocationType = 'RECEIVE_LOCATION';
@@ -88,25 +88,25 @@ export function useLocation() {
 
   const [state, dispatch] = context;
 
-  const setLocation = ({ latitude, longitude }) => {
+  const setLocation = useCallback(({ latitude, longitude }) => {
     if (state.location.latitude === latitude && state.location.longitude === longitude) {
       return;
     }
 
     dispatch({ type: 'SET_LOCATION', location: { latitude, longitude } });
-  };
+  }, [dispatch, state.location.latitude, state.location.longitude]);
 
-  const setZoom = ({ zoom }) => {
+  const setZoom = useCallback(({ zoom }) => {
     if (state.zoom === zoom) {
       return;
     }
     dispatch({ type: 'SET_ZOOM', zoom });
-  };
+  }, [dispatch, state.zoom]);
 
-  return {
+  return useMemo(() => ({
     state,
     dispatch,
     setLocation,
     setZoom
-  };
+  }), [dispatch, setLocation, setZoom, state]);
 }

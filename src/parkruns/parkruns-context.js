@@ -76,7 +76,6 @@ export function useParkruns() {
   }
 
   const [state, dispatch] = context;
-
   const requestParkruns = async ({ south, west, north, east }) => {
 
     if (!shouldSendRequest({ state, bounds: { south, west, north, east } })) {
