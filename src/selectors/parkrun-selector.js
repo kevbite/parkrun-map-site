@@ -1,5 +1,6 @@
 import turfDistance from '@turf/distance';
 import { point } from "@turf/helpers";
+import selectSpecialEventYears from './special-event-years-selector';
 
 export default function selectParkruns({ parkruns, filters, userLocation: { location = undefined } = {} }) {
 
@@ -35,26 +36,12 @@ export default function selectParkruns({ parkruns, filters, userLocation: { loca
     };
 
     const matchesSpecialEvent = () => {
-      const today = new Date();
 
-      const christmasDayYears = [];
-      if (filters.specialEvents.christmasDay) {
-        if(today.getMonth() == 11){
-          christmasDayYears.push(today.getFullYear())
-        }else{
-          christmasDayYears.push(today.getFullYear()-1)
-        }
-      }
+      const specialEventYears = selectSpecialEventYears();
 
-      const newYearsDayYears = [];
-      if (filters.specialEvents.newYearsDay) {
-        if(today.getMonth() == 11){
-          newYearsDayYears.push(today.getFullYear()+1)
-        }else{
-          newYearsDayYears.push(today.getFullYear())
-        }
-      }
-
+      const christmasDayYears = filters.specialEvents.christmasDay ? specialEventYears.christmasDayYears : [];
+      const newYearsDayYears = filters.specialEvents.newYearsDay ? specialEventYears.newYearsDayYears : [];
+      
       return christmasDayYears.every(val => specialEvents.christmasDay.includes(val))
               && newYearsDayYears.every(val => specialEvents.newYearsDay.includes(val))
     };

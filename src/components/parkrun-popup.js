@@ -6,8 +6,8 @@ import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import ParkrunFeatures from './parkrun-features';
+import ParkrunSpecialEvents from './parkrun-special-events';
 import ParkrunTerrain from './parkrun-terrain';
-import CancellationsButton from './cancellations-button';
 import { Link } from "gatsby"
 
 const styles = theme => ({
@@ -57,6 +57,8 @@ export default withStyles(styles)(({ parkrun, classes }) => {
     <div className={classes.section2}>
       <ParkrunTerrain terrain={parkrun.course.terrain} />
       <ParkrunFeatures features={parkrun.features} />
+      <ParkrunSpecialEvents specialEvents={parkrun.specialEvents} />
+
     </div>
 
     {parkrun.cancellations.length > 0 &&
