@@ -23,7 +23,7 @@ export default function selectParkruns({ parkruns, filters, userLocation: { loca
 
   const selectedFeatureFilters = Object.entries(filters.features || []).filter(x => x[1]).map(x => x[0]);
 
-  const filteredParkruns = parkruns.filter(({ features, course: { terrain } = {} }) => {
+  const filteredParkruns = parkruns.filter(({ features, course: { terrain } = {}, specialEvents }) => {
 
     const selectedWhen = selectedFeatureFilters.map(x => features[x]);
 
@@ -34,7 +34,34 @@ export default function selectParkruns({ parkruns, filters, userLocation: { loca
       return filters.terrain.every(val => terrain.includes(val))
     };
 
-    return selectedWhen.every(x => x) && matchesTerrainFilters();
+    const matchesSpecialEvent = () => {
+      const today = new Date();
+
+      const christmasDayYears = [];
+      if (filters.specialEvents.christmasDay) {
+        if(today.getMonth() == 11){
+          christmasDayYears.push(today.getFullYear())
+        }else{
+          christmasDayYears.push(today.getFullYear()-1)
+        }
+      }
+
+      const newYearsDayYears = [];
+      if (filters.specialEvents.newYearsDay) {
+        if(today.getMonth() == 11){
+          newYearsDayYears.push(today.getFullYear()+1)
+        }else{
+          newYearsDayYears.push(today.getFullYear())
+        }
+      }
+
+      return christmasDayYears.every(val => specialEvents.christmasDay.includes(val))
+              && newYearsDayYears.every(val => specialEvents.newYearsDay.includes(val))
+    };
+
+    
+
+    return selectedWhen.every(x => x) && matchesTerrainFilters() && matchesSpecialEvent();
   });
 
   return filteredParkruns.map(enrichParkrunData);
