@@ -84,7 +84,7 @@ export default withStyles(styles)(({ classes }) => {
 
     const newFilters = {
       ...filters,
-      specialEvents:{
+      specialEvents: {
         ...filters.specialEvents,
         christmasDay: turnOn
       }
@@ -93,7 +93,7 @@ export default withStyles(styles)(({ classes }) => {
     setFilters(newFilters);
   };
 
-  
+
   const onNewYearsDayChanged = () => {
 
     const turnOn = !filters.specialEvents.newYearsDay;
@@ -105,7 +105,7 @@ export default withStyles(styles)(({ classes }) => {
 
     const newFilters = {
       ...filters,
-      specialEvents:{
+      specialEvents: {
         ...filters.specialEvents,
         newYearsDay: turnOn
       }
@@ -114,36 +114,44 @@ export default withStyles(styles)(({ classes }) => {
     setFilters(newFilters);
   };
 
+  const shouldShowSpecialEvents = () => {
+    const today = new Date();
+
+    return today.getMonth() === 11 || today.getMonth() === 0;
+  };
+
   return (
     <div className={classes.container}>
       <div className={classes.root}>
         <h1 className={classes.header}>Filters</h1>
-        <List subheader={<h2 className={classes.header}>Special Events</h2>} >
-          <ListItem>
-            <ListItemIcon>
-              <PineTreeIcon />
-            </ListItemIcon>
-            <ListItemText primary="Christmas Day" onClick={onChristmasDayChanged} />
-            <ListItemSecondaryAction>
-              <Switch
-                onChange={onChristmasDayChanged}
-                checked={filters.specialEvents.christmasDay}
-              />
-            </ListItemSecondaryAction>
-          </ListItem>
-          <ListItem>
-            <ListItemIcon>
-              <CreationIcon />
-            </ListItemIcon>
-            <ListItemText primary="New Years Day" onClick={onNewYearsDayChanged} />
-            <ListItemSecondaryAction>
-              <Switch
-                onChange={onNewYearsDayChanged}
-                checked={filters.specialEvents.newYearsDay}
-              />
-            </ListItemSecondaryAction>
-          </ListItem>
-        </List>
+        {shouldShowSpecialEvents() &&
+          <List subheader={<h2 className={classes.header}>Special Events</h2>} >
+            <ListItem>
+              <ListItemIcon>
+                <PineTreeIcon />
+              </ListItemIcon>
+              <ListItemText primary="Christmas Day" onClick={onChristmasDayChanged} />
+              <ListItemSecondaryAction>
+                <Switch
+                  onChange={onChristmasDayChanged}
+                  checked={filters.specialEvents.christmasDay}
+                />
+              </ListItemSecondaryAction>
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <CreationIcon />
+              </ListItemIcon>
+              <ListItemText primary="New Years Day" onClick={onNewYearsDayChanged} />
+              <ListItemSecondaryAction>
+                <Switch
+                  onChange={onNewYearsDayChanged}
+                  checked={filters.specialEvents.newYearsDay}
+                />
+              </ListItemSecondaryAction>
+            </ListItem>
+          </List>
+        }
         <List subheader={<h2 className={classes.header}>Terrain</h2>} >
           {Object.keys(terrainIcons).map(terrainName => <ListItem key={`terrain-${terrainName}`} >
             <>
