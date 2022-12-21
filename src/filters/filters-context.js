@@ -29,7 +29,11 @@ export function FiltersProvider(props) {
 
         return filters;
       }, {}),
-      terrain: []
+      terrain: [],
+      specialEvents:{
+        christmasDay: false,
+        newYearsDay: false,
+      }
     }
   });
 

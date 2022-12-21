@@ -10,6 +10,8 @@ import { useFilters } from '../filters/filters-context';
 import { availableFilters } from '../components/available-filters';
 import { terrainIcons } from '../components/terrain-icon';
 import ReactGA from 'react-ga';
+import PineTreeIcon from 'mdi-react/PineTreeIcon';
+import CreationIcon from 'mdi-react/CreationIcon';
 
 const styles = theme => ({
   header: {
@@ -68,16 +70,80 @@ export default withStyles(styles)(({ classes }) => {
       terrain
     };
 
+    setFilters(newFilters);
+  };
 
+  const onChristmasDayChanged = () => {
+
+    const turnOn = !filters.specialEvents.christmasDay;
+
+    ReactGA.event({
+      category: 'Filters',
+      action: `SpecialEvents.ChristmasDay.${turnOn ? 'On' : 'Off'}`
+    });
+
+    const newFilters = {
+      ...filters,
+      specialEvents:{
+        ...filters.specialEvents,
+        christmasDay: turnOn
+      }
+    };
 
     setFilters(newFilters);
   };
 
+  
+  const onNewYearsDayChanged = () => {
+
+    const turnOn = !filters.specialEvents.newYearsDay;
+
+    ReactGA.event({
+      category: 'Filters',
+      action: `SpecialEvents.NewYearsDay.${turnOn ? 'On' : 'Off'}`
+    });
+
+    const newFilters = {
+      ...filters,
+      specialEvents:{
+        ...filters.specialEvents,
+        newYearsDay: turnOn
+      }
+    };
+
+    setFilters(newFilters);
+  };
 
   return (
     <div className={classes.container}>
       <div className={classes.root}>
         <h1 className={classes.header}>Filters</h1>
+        <List subheader={<h2 className={classes.header}>Special Events</h2>} >
+          <ListItem>
+            <ListItemIcon>
+              <PineTreeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Christmas Day" onClick={onChristmasDayChanged} />
+            <ListItemSecondaryAction>
+              <Switch
+                onChange={onChristmasDayChanged}
+                checked={filters.specialEvents.christmasDay}
+              />
+            </ListItemSecondaryAction>
+          </ListItem>
+          <ListItem>
+            <ListItemIcon>
+              <CreationIcon />
+            </ListItemIcon>
+            <ListItemText primary="New Years Day" onClick={onNewYearsDayChanged} />
+            <ListItemSecondaryAction>
+              <Switch
+                onChange={onNewYearsDayChanged}
+                checked={filters.specialEvents.newYearsDay}
+              />
+            </ListItemSecondaryAction>
+          </ListItem>
+        </List>
         <List subheader={<h2 className={classes.header}>Terrain</h2>} >
           {Object.keys(terrainIcons).map(terrainName => <ListItem key={`terrain-${terrainName}`} >
             <>
