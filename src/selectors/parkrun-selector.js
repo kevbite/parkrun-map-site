@@ -39,8 +39,8 @@ export default function selectParkruns({ parkruns, filters, userLocation: { loca
 
       const specialEventYears = selectSpecialEventYears();
 
-      const christmasDayYears = filters.specialEvents.christmasDay ? specialEventYears.christmasDayYears : [];
-      const newYearsDayYears = filters.specialEvents.newYearsDay ? specialEventYears.newYearsDayYears : [];
+      const christmasDayYears = filters?.specialEvents?.christmasDay ? specialEventYears.christmasDayYears : [];
+      const newYearsDayYears = filters?.specialEvents?.newYearsDay ? specialEventYears.newYearsDayYears : [];
       
       return christmasDayYears.every(val => specialEvents.christmasDay.includes(val))
               && newYearsDayYears.every(val => specialEvents.newYearsDay.includes(val))
