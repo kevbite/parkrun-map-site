@@ -28,3 +28,13 @@ export const blueIcon = typeof window === 'undefined' ? null : L.icon({
   ...defaultOptions,
   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png'
 });
+
+export const goldIcon = typeof window === 'undefined' ? null : L.icon({
+  ...defaultOptions,
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png'
+});
+
+export const violetIcon = typeof window === 'undefined' ? null : L.icon({
+  ...defaultOptions,
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png'
+});
